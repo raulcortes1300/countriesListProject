@@ -1,53 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-const styles = {
-  container: {
-    textAlign: "center",
-    padding: "20px",
-    backgroundColor: "#f8f9fa",
-    minHeight: "100vh",
-  },
-  list: {
-    listStyleType: "none",
-    padding: 0,
-  },
-  listItem: {
-    padding: "10px 0",
-    borderBottom: "1px solid #dee2e6",
-    display: "flex",
-    alignItems: "center",
-  },
-  flag: {
-    width: "30px",
-    height: "20px",
-    marginRight: "10px",
-  },
-  paginationContainer: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "20px",
-    overflowX: "auto", // Allows horizontal scrolling if needed
-  },
-  pagination: {
-    display: "flex",
-    flexWrap: "wrap", // Allows buttons to wrap to the next line if needed
-    justifyContent: "center",
-  },
-  button: {
-    padding: "10px 20px",
-    fontSize: "16px",
-    margin: "5px", // Adds some space between buttons
-    cursor: "pointer",
-    backgroundColor: "#007bff",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    transition: "background-color 0.3s ease",
-  },
-  activeButton: {
-    backgroundColor: "#0056b3",
-  },
-};
+import "./ListOfCountries.css";
 
 export const ListOfCountries = () => {
   const [countries, setCountries] = useState([]);
@@ -90,11 +42,7 @@ export const ListOfCountries = () => {
       pageNumbers.push(
         <button
           key={i}
-          style={
-            currentPage === i
-              ? { ...styles.button, ...styles.activeButton }
-              : styles.button
-          }
+          className={currentPage === i ? "button activeButton" : "button"}
           onClick={() => handlePageChange(i)}
         >
           {i}
@@ -105,22 +53,22 @@ export const ListOfCountries = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <div className="container">
       <h1>Countries</h1>
-      <ul style={styles.list}>
+      <ul className="list">
         {currentCountries.map((country) => (
-          <li key={country.cca3} style={styles.listItem}>
+          <li key={country.cca3} className="listItem">
             <img
               src={country.flags.png}
               alt={country.flags.alt}
-              style={styles.flag}
+              className="flag"
             />
             {country.name.common}
           </li>
         ))}
       </ul>
-      <div style={styles.paginationContainer}>
-        <div style={styles.pagination}>{renderPageNumbers()}</div>
+      <div className="paginationContainer">
+        <div className="pagination">{renderPageNumbers()}</div>
       </div>
     </div>
   );
