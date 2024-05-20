@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ListOfCountries.css";
+import { Link } from "react-router-dom";
 
 export const ListOfCountries = () => {
   const [countries, setCountries] = useState([]);
@@ -21,7 +22,6 @@ export const ListOfCountries = () => {
     };
     fetchData();
   }, []);
-  console.log(countries);
 
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
@@ -63,7 +63,7 @@ export const ListOfCountries = () => {
               alt={country.flags.alt}
               className="flag"
             />
-            {country.name.common}
+            <Link to={`/country/${country.cca3}`}>{country.name.common}</Link>
           </li>
         ))}
       </ul>
