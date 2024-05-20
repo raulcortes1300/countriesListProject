@@ -47,13 +47,16 @@ export const ListOfCountries = () => {
       try {
         const response = await fetch("https://restcountries.com/v3.1/all");
         const result = await response.json();
-        setCountries(result);
+        const sortedCountries = result.sort((a, b) =>
+          a.name.common.localeCompare(b.name.common)
+        );
+        setCountries(sortedCountries);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  });
+  }, []);
   console.log(countries);
 
   const indexOfLastCountry = currentPage * countriesPerPage;
